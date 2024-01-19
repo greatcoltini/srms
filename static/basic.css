@@ -1,0 +1,36 @@
+/* We want to have a sidebar for navigation; so we will use grid styling and just use a small portion of the screen for the sidebar */
+
+html, body{
+    height: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-gap: 0px;
+    position: relative;
+    height: auto;
+}
+
+
+.aside-grid {
+    position: absolute;
+    top: 5%;
+    height: 100%;
+    z-index: 1;
+    border: 1px black solid;
+    border-radius: 5px 5px 5px 0px;
+}
+
+.grid-main {
+    grid-row: 1;
+    grid-column: 2;
+    margin: auto;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+    border: 1px black solid;
+    border-radius: 5px
+}
