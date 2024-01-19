@@ -58,11 +58,11 @@ def register():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # Ensure username was submitted
+        # Ensure first name was submitted
         if not request.form.get("firstname"):
             return apology("must provide your first name", 400)
 
-        # Ensure password was submitted
+        # Ensure last name was submitted
         elif not request.form.get("lastname"):
             return apology("must provide your last name", 400)
         
@@ -77,7 +77,7 @@ def register():
 
         for student in existing_students:
             if student["firstname"] == firstname:
-                return apology("current username already present in database")
+                return apology("current student already present in database")
 
         # Insert user into database
         db.execute("INSERT INTO students (firstname, lastname, birthdate) VALUES (?, ?, ?)", firstname, lastname, birthdate)
@@ -87,5 +87,39 @@ def register():
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("register.html")
+        return render_template("student.html")
+    
+
+@app.route("/courses", methods=["GET", "POST"])
+def courses():
+    """Register user"""
+    """Log user in"""
+
+    # Forget any user_id
+    session.clear()
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+
+        # Ensure username was submitted
+        if not request.form.get("coursename"):
+            return apology("must provide your course name", 400)
+        
+        coursename = request.form.get("coursename")
+
+        existing_courses = db.execute("SELECT coursename FROM COURSES")
+
+        for course in existing_courses:
+            if course["coursename"] == coursename:
+                return apology("current course already present in database")
+
+        # Insert user into database
+        db.execute("INSERT INTO COURSES (coursename) VALUES (?)", coursename)
+
+        # Redirect user to home page
+        return redirect("/")
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("courses.html")
 
