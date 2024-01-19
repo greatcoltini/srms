@@ -46,22 +46,19 @@
             </ul>
         </div>
 
-        <div class="grid-container">
+        {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-primary mb-0 text-center" role="alert">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+        {% endif %}
 
-            {% if get_flashed_messages() %}
-                <header>
-                    <div class="alert alert-primary mb-0 text-center" role="alert">
-                        {{ get_flashed_messages() | join(" ") }}
-                    </div>
-                </header>
-            {% endif %}
+        <main class="grid-main container-fluid py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
 
-            <main class="grid-main container-fluid py-5 text-center">
-                {% block main %}{% endblock %}
-            </main>
-
-        </div>
-
+       
         <footer class="mb-5 small text-center text-muted">
             Created by Colton Donkersgoed &copy; 2024
             <br> Assisted with CS50's SQL services

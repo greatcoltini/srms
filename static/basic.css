@@ -4,15 +4,6 @@ html, body{
     height: 100%;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    grid-gap: 0px;
-    position: relative;
-    height: auto;
-}
-
-
 .aside-grid {
     position: absolute;
     top: 5%;
@@ -20,12 +11,6 @@ html, body{
     z-index: 1;
     border: 1px black solid;
     border-radius: 5px 5px 5px 0px;
-}
-
-.grid-main {
-    grid-row: 1;
-    grid-column: 2;
-    margin: auto;
 }
 
 h1 {
