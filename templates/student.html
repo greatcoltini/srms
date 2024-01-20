@@ -7,15 +7,35 @@
 {% block main %}
     <form action="/register" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="firstname" name="firstname" placeholder="First name" type="text">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="firstname" name="firstname" placeholder="First name" type="text" required="true">
         </div>
         <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="lastname" name="lastname" placeholder="Family name" type="text">
+            <input class="form-control mx-auto w-auto" id="lastname" name="lastname" placeholder="Family name" type="text" required="true">
         </div>
         <!-- For date of birth, must be a valid date, and student must be at least ten years old; for simplicity we will just max it out at 10 years from date of creation -->
         <div class="mb-3"> 
-            <input class="form-control mx-auto w-auto" id="birthdate" name="birthdate" value="2000-01-01" max="2014-01-19" min="1924-01-19" type="date">
+            <input class="form-control mx-auto w-auto" id="birthdate" name="birthdate" value="2000-01-01" max="2014-01-19" min="1924-01-19" type="date" required="true">
         </div>
-        <button class="btn btn-primary" type="submit">Register Student</button>
+        <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#registerAlert">Register Student</button>
     </form>
+
+        <!-- Modal -->
+    <div class="modal fade" id="registerAlert" tabindex="-1" role="dialog" aria-labelledby="registerAlertLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="registerAlertLabel">Student Registered!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
 {% endblock %}

@@ -76,14 +76,17 @@ def register():
         existing_students = db.execute("SELECT firstname FROM STUDENTS")
 
         for student in existing_students:
-            if student["firstname"] == firstname:
+            if student["firstname"] == firstname and student["lastname"] == lastname:
                 return apology("current student already present in database")
 
         # Insert user into database
         db.execute("INSERT INTO students (firstname, lastname, birthdate) VALUES (?, ?, ?)", firstname, lastname, birthdate)
 
+        # notify user that the student was registered
+        flash("Student " + firstname + " " + lastname + " has been registered.")
+
         # Redirect user to home page
-        return redirect("/")
+        return render_template("student.html")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
