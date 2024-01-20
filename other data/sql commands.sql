@@ -13,13 +13,15 @@
 -- )
 
 
-CREATE TABLE grades (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    coursename TEXT NOT NULL,
-    firstname TEXT  NOT NULL,
-    lastname TEXT   NOT NULL,
-    grade   TEXT    NOT NULL
-)
+-- CREATE TABLE grades (
+--     ID INTEGER PRIMARY KEY AUTOINCREMENT,
+--     coursename TEXT NOT NULL,
+--     firstname TEXT  NOT NULL,
+--     lastname TEXT   NOT NULL,
+--     grade   TEXT    NOT NULL
+-- )
 
 
-DROP TABLE courses;
+-- DROP TABLE courses;
+
+DELETE FROM students;

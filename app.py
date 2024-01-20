@@ -24,11 +24,6 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///management.db")
 
-# Make sure API key is set
-# if not os.environ.get("API_KEY"):
-#     raise RuntimeError("API_KEY not set")
-
-
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -41,7 +36,28 @@ def after_request(response):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+
+    # init databases for info
+    students = db.execute("SELECT * FROM students ORDER BY ID DESC")
+    courses = db.execute("SELECT * FROM courses ORDER BY ID DESC")
+    grades = db.execute("SELECT * FROM grades ORDER BY ID DESC")
+
+    if not students or not courses or not grades:
+        totalStudents = students[0]["ID"]
+        totalCourses = courses[0]["ID"]
+        totalGrades = grades[0]["ID"]
+
+    # checks for no input to prevent weird none state
+    if totalStudents == None:
+        totalStudents = 0
+    if totalCourses == None:
+        totalCourses = 0
+    if totalGrades == None:
+        totalGrades = 0
+
+
+
+    return render_template("index.html", courseTotal = totalCourses, studentTotal = totalStudents, gradesTotal = totalGrades)
 
 
 
@@ -125,6 +141,7 @@ def results():
 
     courses = db.execute("SELECT coursename FROM COURSES")
     students = db.execute("SELECT * FROM students") 
+    gradetable = db.execute("SELECT * FROM grades ORDER BY coursename DESC, grade ASC")
 
     # user reached route via post, i.e. submitting the form
     if request.method == "POST":
@@ -138,21 +155,24 @@ def results():
 
         required_student = db.execute("SELECT * FROM students WHERE ID=%s", studentid)
 
-        print(required_student)
-
-        
-
-
         db.execute("INSERT INTO grades (coursename, firstname, lastname, grade) VALUES (?, ?, ?, ?)", 
                    coursename, required_student[0]['firstname'], required_student[0]['lastname'], grade)
+        
+        db.execute("UPDATE courses SET enrolled = enrolled + 1 WHERE coursename=%s", coursename)
+        
+        # flash user
+        flash("Grades added to " + coursename + " from Student " + required_student[0]["firstname"])
+        
+        # refresh table upon add
+        gradetable = db.execute("SELECT * FROM grades ORDER BY coursename DESC, grade DESC")
 
 
-        return render_template("results.html", students = students, courses = courses, grades=GRADES)
+        return render_template("results.html", students = students, courses = courses, grades=GRADES, gradetable=gradetable)
 
 
     # user reached via get -- clicking link or redirct
     else:
-        return render_template("results.html", students=students, courses=courses, grades=GRADES)
+        return render_template("results.html", students=students, courses=courses, grades=GRADES, gradetable=gradetable)
 
            
 

@@ -52,16 +52,17 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th> ID </th>
-                    <th> Course Name</th>
-                    <th> Students Enrolled </th>
+                    <th> Course</th>
+                    <th> Name </th>
+                    <th> Grade </th>
                 </tr>
             </thead>
             <tbody>
-                {% for course in courses %}
+                {% for grading in gradetable %}
                     <tr>
-                        <td>{{ course["ID"] }}</td>
-                        <td>{{ course["coursename"] }}</td>
+                        <td>{{ grading["coursename"] }}</td>
+                        <td>{{ grading["firstname"] }} {{ grading["lastname"] }}</td>
+                        <td>{{ grading["grade"] }} </td>
                     </tr>
                 {% endfor %}
             </tbody>
