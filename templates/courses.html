@@ -5,14 +5,15 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/courses" method="post">
-        <div class="mb-3">
-            <label for="coursename" class="form-label left-text">Course:</label>
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="coursename" name="coursename" placeholder="Course name" type="text" required="true">
-        </div>
-        <button class="btn btn-primary" type="submit">Register Course</button>
-    </form>
-
+    <div class="table-container">
+        <form action="/courses" method="post">
+            <div class="mb-3">
+                <label for="coursename" class="form-label left-text">Course:</label>
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="coursename" name="coursename" placeholder="Course name" type="text" required="true">
+            </div>
+            <button class="btn btn-primary" type="submit">Register Course</button>
+        </form>
+    </div>
 
     <!-- SECTION FOR COURSE TABLE -->
     <div class="table-container">
