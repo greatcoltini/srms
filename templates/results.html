@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <!-- SECTION FOR SUBMISSION FORM -->
+    <div class="table-container">
+        <form action="/results" method="post">
+
+            <div class="mb-3 row">
+                <div class="col">
+                    <!-- form selection for courses -->
+                    <label for="course" class="form-label left-text">Course:</label>
+                    <select name="course" id="course" class="form-select" aria-label="Default select example" required="true">
+                        {% for course in courses %}
+                        <option value="{{course['coursename']}}">{{course['coursename']}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col">
+                    <!-- form selection for students -->
+                    <label for="student" class="form-label left-text">Student:</label>
+                    <select name="student" id="student" class="form-select" aria-label="Default select example" required="true">
+                        {% for student in students %}
+                        <option value="{{student['ID']}}">{{ student['firstname']}}  {{ student['lastname'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col">
+                    <!-- form selection for possible grades -->
+                    <label for="grade" class="form-label left-text">Grade:</label>
+                    <select name="grade" id="grade" class="form-select" aria-label="Defaut select example" required="true">
+                        {% for grade in grades %}
+                        <option value="{{grade}}"> {{ grade }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Register Grades</button>
+        </form>
+    </div>
+
+
+    <!-- SECTION FOR COURSE TABLE -->
+    <div class="table-container">
+        <h1> COURSES AND STUDENTS RESULTS</h1>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> Course Name</th>
+                    <th> Students Enrolled </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course["ID"] }}</td>
+                        <td>{{ course["coursename"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

@@ -19,3 +19,13 @@ h1 {
     border: 1px black solid;
     border-radius: 5px
 }
+
+.table-container{
+    width: 75%;
+    margin: auto;
+    margin-bottom: 5%;
+}
+
+.left-text {
+    text-align: left !important;
+}

@@ -7,8 +7,34 @@
 {% block main %}
     <form action="/courses" method="post">
         <div class="mb-3">
+            <label for="coursename" class="form-label left-text">Course:</label>
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="coursename" name="coursename" placeholder="Course name" type="text" required="true">
         </div>
         <button class="btn btn-primary" type="submit">Register Course</button>
     </form>
+
+
+    <!-- SECTION FOR COURSE TABLE -->
+    <div class="table-container">
+        <h1> COURSES REGISTERED</h1>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> Course Name</th>
+                    <th> Students Enrolled </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course["ID"] }}</td>
+                        <td>{{ course["coursename"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
 {% endblock %}
