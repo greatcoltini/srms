@@ -43,16 +43,16 @@ def index():
     totalGrades = None
 
     # init databases for info
-    students = db.execute("SELECT * FROM students ORDER BY ID DESC")
-    courses = db.execute("SELECT * FROM courses ORDER BY ID DESC")
-    grades = db.execute("SELECT * FROM grades ORDER BY ID DESC")
+    students = db.execute("SELECT COUNT(*) FROM students")
+    courses = db.execute("SELECT COUNT(*) FROM courses")
+    grades = db.execute("SELECT COUNT(*) FROM grades")
 
     if not students or not courses or not grades:
         pass
     else:
-        totalStudents = students[0]["ID"]
-        totalCourses = courses[0]["ID"]
-        totalGrades = grades[0]["ID"]
+        totalStudents = students[0]['COUNT(*)']
+        totalCourses = courses[0]['COUNT(*)']
+        totalGrades = grades[0]['COUNT(*)']
 
     # checks for no input to prevent weird none state
     if totalStudents == None:
