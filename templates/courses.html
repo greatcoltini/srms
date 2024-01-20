@@ -21,7 +21,6 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th> ID </th>
                     <th> Course Name</th>
                     <th> Students Enrolled </th>
                 </tr>
@@ -29,7 +28,6 @@
             <tbody>
                 {% for course in courses %}
                     <tr>
-                        <td>{{ course["ID"] }}</td>
                         <td>{{ course["coursename"] }}</td>
                         <td>{{ course["enrolled"] }}</td>
                     </tr>
