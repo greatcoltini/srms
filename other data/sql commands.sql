@@ -24,4 +24,4 @@
 
 -- DROP TABLE courses;
 
-DELETE FROM students;
+DELETE FROM grades;
