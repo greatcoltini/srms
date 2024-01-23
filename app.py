@@ -222,7 +222,7 @@ def results():
             # flash user
             flash("Grades added to " + coursename + " from Student " + student_fn + " " + student_ln)
         else:
-            flash("Student " + student_fn + " " + student_ln + " is already enrolled in course " + coursename)
+            flash("Student " + student_fn + " " + student_ln + " is already enrolled in course " + coursename, 'warning')
         
         # refresh table upon add
         gradetable = db.execute("SELECT * FROM grades ORDER BY coursename DESC, grade DESC")
