@@ -29,7 +29,14 @@ def after_request(response):
     return response
 
 
+"""
+Default route for user to take; contains the landing page for the user.
 
+This route will provide information about the student, grades, and course count.
+Because of this, we must pull this information from the database, if there is no
+count for any of these values then we pass.
+
+"""
 @app.route("/")
 def index():
 
@@ -64,6 +71,22 @@ def index():
 
 
 
+"""
+The student registration page.
+
+Methods:
+
+POST: The user reaches this via submitting a form. This is the stage where a 
+user will be registering a student. We will pull the student's information
+via the form submission, and fill in the database correspondingly.
+
+GET: The user got to this page by redirect or another link; this is the default
+possibility for the user, no form submission methods needed.
+
+When we render this page we need to pass in the students table to
+display the HTML view of the students.
+
+"""
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -104,6 +127,20 @@ def register():
         return render_template("student.html", students=students)
     
 
+"""
+The course registration page.
+
+POST: The user reaches this page via submitting the course form. This is the
+point where the user will be registering a course for the database.
+This is straightforward, and will just fill in a new item on the course 
+table in the database.
+
+GET: The user got to this page via redirect or another link; no action required.
+
+When we render this template we need to pass in the courses table to render the
+HTML viewing of the table.
+
+"""
 @app.route("/courses", methods=["GET", "POST"])
 def courses():
     """Register user"""
@@ -138,6 +175,20 @@ def courses():
     else:
         return render_template("courses.html", courses=courses)
     
+
+"""
+The grading page for the students.
+
+POST: In the post section, we will add a new item to the grades table
+corresponding to the student's grade with the corresponding course.
+
+GET: As with the other methods, we get here via link and therefore just
+display the page.
+
+Whenever we render this template, we need to pass in the three
+tables to generate the form fields and the table below.
+
+"""
 @app.route("/results", methods=["GET", "POST"])
 def results():
     """ method for launching the results page"""
