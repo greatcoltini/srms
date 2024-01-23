@@ -109,7 +109,8 @@ def register():
 
         for student in existing_students:
             if student["firstname"] == firstname and student["lastname"] == lastname:
-                return flash("current student already present in database", "warning")
+                flash("current student already present in database", "warning")
+                return render_template("student.html", students=students)
 
         # Insert user into database
         db.execute("INSERT INTO students (firstname, lastname, birthdate) VALUES (?, ?, ?)", firstname, lastname, birthdate)
@@ -158,7 +159,7 @@ def courses():
         for course in existing_courses:
             if course["coursename"] == coursename:
                 flash("Course is already in the database.", "warning")
-                return render_template("courses.html")
+                return render_template("courses.html", courses=courses)
 
         # Insert user into database
         db.execute("INSERT INTO COURSES (coursename) VALUES (?)", coursename)

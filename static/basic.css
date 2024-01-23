@@ -29,3 +29,8 @@ h1 {
 .left-text {
     text-align: left !important;
 }
+
+/* color for flask error messages */
+.warning {
+    color :red;
+}
