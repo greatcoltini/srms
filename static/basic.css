@@ -6,7 +6,7 @@ html, body{
 
 .aside-grid {
     position: absolute;
-    top: 5%;
+    top: 6%;
     height: 100%;
     z-index: 1;
     border: 1px black solid;
