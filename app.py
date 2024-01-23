@@ -116,7 +116,7 @@ def register():
         db.execute("INSERT INTO students (firstname, lastname, birthdate) VALUES (?, ?, ?)", firstname, lastname, birthdate)
 
         # notify user that the student was registered
-        flash("Student " + firstname + " " + lastname + " has been registered.")
+        flash("Student " + firstname + " " + lastname + " has been registered.", category="primary")
 
         students = db.execute("SELECT * FROM students ORDER BY ID ASC")
 
@@ -164,7 +164,7 @@ def courses():
         # Insert user into database
         db.execute("INSERT INTO COURSES (coursename) VALUES (?)", coursename)
 
-        flash("Course " + coursename + " has been added to the registry.")
+        flash("Course " + coursename + " has been added to the registry.", category="primary")
 
         # Recalls the courses to add the newly added course
         courses = db.execute("SELECT * FROM courses ORDER BY coursename DESC")
@@ -221,7 +221,7 @@ def results():
             db.execute("UPDATE courses SET enrolled = enrolled + 1 WHERE coursename=%s", coursename)
         
             # flash user
-            flash("Grades added to " + coursename + " from Student " + student_fn + " " + student_ln)
+            flash("Grades added to " + coursename + " from Student " + student_fn + " " + student_ln, category="primary")
         else:
             flash("Student " + student_fn + " " + student_ln + " is already enrolled in course " + coursename, category="warning")
         

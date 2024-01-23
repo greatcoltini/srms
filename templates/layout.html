@@ -48,9 +48,11 @@
 
         {% if get_flashed_messages() %}
         <header>
-            <div class="alert alert-primary mb-0 text-center" role="alert">
-                {{ get_flashed_messages() | join(" ") }}
-            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <div class="{{ category }} alert alert-{{category}} mb-0 text-center" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endwith %}
         </header>
         {% endif %}
 
