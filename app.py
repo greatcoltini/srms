@@ -206,16 +206,23 @@ def results():
         studentid = request.form.get("student")
         grade = request.form.get("grade")
 
-
         required_student = db.execute("SELECT * FROM students WHERE ID=%s", studentid)
 
-        db.execute("INSERT INTO grades (coursename, firstname, lastname, grade) VALUES (?, ?, ?, ?)", 
-                   coursename, required_student[0]['firstname'], required_student[0]['lastname'], grade)
+        student_fn = required_student[0]['firstname']
+        student_ln = required_student[0]['lastname']
+
+        if not db.execute("SELECT * FROM grades "
+                    + "WHERE firstname=%s AND lastname=%s AND coursename=%s", student_fn,
+                    student_ln, coursename):
+            db.execute("INSERT INTO grades (coursename, firstname, lastname, grade) VALUES (?, ?, ?, ?)", 
+                    coursename, student_fn, student_ln, grade)
+            
+            db.execute("UPDATE courses SET enrolled = enrolled + 1 WHERE coursename=%s", coursename)
         
-        db.execute("UPDATE courses SET enrolled = enrolled + 1 WHERE coursename=%s", coursename)
-        
-        # flash user
-        flash("Grades added to " + coursename + " from Student " + required_student[0]["firstname"])
+            # flash user
+            flash("Grades added to " + coursename + " from Student " + student_fn + " " + student_ln)
+        else:
+            flash("Student " + student_fn + " " + student_ln + " is already enrolled in course " + coursename)
         
         # refresh table upon add
         gradetable = db.execute("SELECT * FROM grades ORDER BY coursename DESC, grade DESC")
